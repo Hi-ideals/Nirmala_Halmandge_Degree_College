@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Department of Commerce | Nirmala M Halmandge Degree College Bhalki</title>
+<meta name="description" content="Explore the Department of Commerce at Nirmala M Halmandge Degree College, Bhalki — faculty, objectives, and facilities." />
+<link rel="icon" href="./images/logo.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.snippet.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="antialiased">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="relative bg-ink py-16 sm:py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-25">
+      <img id="ph-img" src="" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/60"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="seal-badge text-marigold border-marigold text-xs uppercase tracking-wider">Departments</span>
+      <h1 id="ph-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cream mt-5"></h1>
+      <div class="flex items-center gap-2 text-cream/60 text-sm mt-4">
+        <a href="index.html" class="hover:text-marigold transition-colors">Home</a>
+        <span>/</span>
+        <span id="ph-breadcrumb" class="text-marigold"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+      <div class="reveal order-2 lg:order-1">
+        <h2 class="font-display text-2xl font-bold text-ink mb-4">About the Department</h2>
+        <p id="dept-about" class="text-ink/75 leading-relaxed"></p>
+
+        <h3 class="font-display text-xl font-semibold text-ink mt-8 mb-4">Objectives</h3>
+        <ul id="dept-objectives" class="space-y-3"></ul>
+      </div>
+      <div class="reveal order-1 lg:order-2">
+        <div class="rounded-2xl overflow-hidden shadow-xl">
+          <img id="dept-img" src="" alt="Department of Commerce" class="w-full h-full object-cover" />
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="bg-sand/50 rounded-2xl p-8 mt-16 reveal">
+      <h3 class="font-display text-xl font-semibold text-ink mb-5">Department Facilities</h3>
+      <ul id="dept-facilities" class="grid sm:grid-cols-3 gap-4"></ul>
+    </div>
+  </section>
+
+  <section class="bg-marigold">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="font-display text-2xl font-bold text-ink">Curious about the B.Com curriculum?</h3>
+        <p class="text-ink/70 mt-1">See the full course structure, subjects, and career pathways.</p>
+      </div>
+      <a href="bechelorof-commerese.html" class="inline-flex items-center bg-ink text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-maroon transition-colors shrink-0">
+        View B.Com Course
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="content.js"></script>
+<script src="main.js"></script>
+<script>
+  const D = window.SITE.deptCommerce;
+  document.getElementById('ph-img').src = D.image;
+  document.getElementById('ph-heading').textContent = D.pageTitle;
+  document.getElementById('ph-breadcrumb').textContent = D.breadcrumb;
+  document.getElementById('dept-img').src = D.image;
+  document.getElementById('dept-about').textContent = D.about;
+
+  document.getElementById('dept-objectives').innerHTML = D.objectives.map(o => `
+    <li class="flex items-start gap-3">
+      <svg class="w-5 h-5 text-maroon shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>
+      <span class="text-ink/75 text-[15px] leading-relaxed">${o}</span>
+    </li>
+  `).join('');
+  
+
+ 
+
+  document.getElementById('dept-facilities').innerHTML = D.facilities.map(f => `
+    <li class="flex items-start gap-2.5 text-sm text-ink/75">
+      <svg class="w-4 h-4 text-forest shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+      ${f}
+    </li>
+  `).join('');
+</script>
+</body>
+</html>

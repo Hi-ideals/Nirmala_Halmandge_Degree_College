@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gallery | Nirmala M Halmandge Degree College Bhalki</title>
+<meta name="description" content="Browse photos of campus life, events, sports, and academics at Nirmala M Halmandge Degree College, Bhalki." />
+<link rel="icon" href="./images/logo.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.snippet.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="antialiased">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="relative bg-ink py-16 sm:py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-25">
+      <img src="https://picsum.photos/seed/nmh-gallery-bg/1600/500" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/60"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="seal-badge text-marigold border-marigold text-xs uppercase tracking-wider">Campus Moments</span>
+      <h1 id="ph-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cream mt-5"></h1>
+      <div class="flex items-center gap-2 text-cream/60 text-sm mt-4">
+        <a href="index.html" class="hover:text-marigold transition-colors">Home</a>
+        <span>/</span>
+        <span id="ph-breadcrumb" class="text-marigold"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <p id="gallery-intro" class="text-ink/70 leading-relaxed max-w-2xl reveal"></p>
+
+    <div id="gallery-filters" class="flex flex-wrap gap-3 mt-8"></div>
+
+    <div id="gallery-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-10"></div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="content.js"></script>
+<script src="main.js"></script>
+<script>
+  const D = window.SITE.gallery;
+  document.getElementById('ph-heading').textContent = D.pageTitle;
+  document.getElementById('ph-breadcrumb').textContent = D.breadcrumb;
+  document.getElementById('gallery-intro').textContent = D.intro;
+
+  let activeFilter = 'All';
+  let currentIndex = 0;
+  let filteredImages = D.images;
+
+  function renderFilters() {
+    document.getElementById('gallery-filters').innerHTML = D.categories.map(cat => `
+      <button type="button" data-filter="${cat}" class="filter-btn ${cat === activeFilter ? 'active' : ''} border border-maroon/30 text-ink px-5 py-2 rounded-full text-sm font-medium">
+        ${cat}
+      </button>
+    `).join('');
+
+    document.querySelectorAll('[data-filter]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeFilter = btn.getAttribute('data-filter');
+        renderFilters();
+        renderGrid();
+      });
+    });
+  }
+
+  function renderGrid() {
+    filteredImages = activeFilter === 'All' ? D.images : D.images.filter(img => img.category === activeFilter);
+    document.getElementById('gallery-grid').innerHTML = filteredImages.map((img, i) => `
+      <button type="button" data-index="${i}" class="gallery-item group lift-card relative rounded-2xl overflow-hidden h-64 text-left">
+        <img src="${img.src}" alt="${img.caption}" class="img-zoom absolute inset-0 w-full h-full object-cover" />
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+        <div class="absolute bottom-0 left-0 p-4 opacity-0 group-hover:opacity-100 transition-opacity translate-y-2 group-hover:translate-y-0">
+          <p class="text-cream text-sm font-medium">${img.caption}</p>
+          <p class="text-marigold text-xs uppercase tracking-wide mt-0.5">${img.category}</p>
+        </div>
+      </button>
+    `).join('');
+
+    document.querySelectorAll('.gallery-item').forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentIndex = parseInt(btn.getAttribute('data-index'), 10);
+        openLightbox();
+      });
+    });
+  }
+
+  function openLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    if (!lightbox || !img) return;
+    img.src = filteredImages[currentIndex].src;
+    img.alt = filteredImages[currentIndex].caption;
+    lightbox.classList.add('open');
+  }
+
+  function showRelative(delta) {
+    currentIndex = (currentIndex + delta + filteredImages.length) % filteredImages.length;
+    openLightbox();
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    renderFilters();
+    renderGrid();
+
+    // these elements come from main.js's footer render, so attach after a tick
+    setTimeout(() => {
+      const prevBtn = document.getElementById('lightboxPrev');
+      const nextBtn = document.getElementById('lightboxNext');
+      const closeBtn = document.getElementById('lightboxClose');
+      const lightbox = document.getElementById('lightbox');
+
+      prevBtn && prevBtn.addEventListener('click', () => showRelative(-1));
+      nextBtn && nextBtn.addEventListener('click', () => showRelative(1));
+
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox || !lightbox.classList.contains('open')) return;
+        if (e.key === 'ArrowLeft') showRelative(-1);
+        if (e.key === 'ArrowRight') showRelative(1);
+        if (e.key === 'Escape') lightbox.classList.remove('open');
+      });
+    }, 0);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Teaching Staff | Nirmala M Halmandge Degree College Bhalki</title>
+<meta name="description" content="Meet the dedicated teaching faculty of Nirmala M Halmandge Degree College, Bhalki." />
+<link rel="icon" href="./images/logo.webp" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Lora:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="tailwind.config.snippet.js"></script>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body class="antialiased">
+
+<div id="site-header"></div>
+
+<main>
+
+  <section class="relative bg-ink py-16 sm:py-20 overflow-hidden">
+    <div class="absolute inset-0 opacity-25">
+      <img src="https://picsum.photos/seed/nmh-teaching-bg/1600/500" alt="" class="w-full h-full object-cover" />
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-r from-ink via-ink/85 to-ink/60"></div>
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <span class="seal-badge text-marigold border-marigold text-xs uppercase tracking-wider">Faculty & Staff</span>
+      <h1 id="ph-heading" class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold text-cream mt-5"></h1>
+      <div class="flex items-center gap-2 text-cream/60 text-sm mt-4">
+        <a href="index.html" class="hover:text-marigold transition-colors">Home</a>
+        <span>/</span>
+        <span id="ph-breadcrumb" class="text-marigold"></span>
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
+    <p id="staff-intro" class="text-ink/70 leading-relaxed max-w-2xl reveal"></p>
+    <div id="staff-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-12"></div>
+  </section>
+
+  <section class="bg-marigold">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div>
+        <h3 class="font-display text-2xl font-bold text-ink">Meet our non-teaching team</h3>
+        <p class="text-ink/70 mt-1">The administrative and support staff who keep the campus running.</p>
+      </div>
+      <a href="nonteaching_staff.html" class="inline-flex items-center bg-ink text-cream px-7 py-3.5 rounded-full font-semibold hover:bg-maroon transition-colors shrink-0">
+        Non-Teaching Staff
+      </a>
+    </div>
+  </section>
+
+</main>
+
+<div id="site-footer"></div>
+
+<script src="content.js"></script>
+<script src="main.js"></script>
+<script>
+  const D = window.SITE.teachingStaff;
+  document.getElementById('ph-heading').textContent = D.pageTitle;
+  document.getElementById('ph-breadcrumb').textContent = D.breadcrumb;
+  document.getElementById('staff-intro').textContent = D.intro;
+
+  document.getElementById('staff-grid').innerHTML = D.members.map(m => `
+    <div class="lift-card bg-white rounded-2xl overflow-hidden border border-sand">
+      <div class="h-56 overflow-hidden">
+        <img src="${m.image}" alt="${m.name}" class="w-full h-full object-cover" />
+      </div>
+      <div class="p-5">
+        <h3 class="font-display font-semibold text-ink leading-snug">${m.name}</h3>
+        <p class="text-maroon text-sm mt-1">${m.role}</p>
+        <p class="text-ink/50 text-xs mt-2 uppercase tracking-wide">${m.qualification}</p>
+      </div>
+    </div>
+  `).join('');
+</script>
+</body>
+</html>
