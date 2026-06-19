@@ -13,7 +13,7 @@ const SITE = {
      CORE IDENTITY
   ============================================================ */
   meta: {
-    name: "Nirmala M Halmandge Degree Collegeeeee",
+    name: "Nirmala M Halmandge Degree College",
     shortName: "NMH Degree College",
     place: "Bhalki",
     district: "Bidar",
@@ -123,7 +123,7 @@ const SITE = {
   home: {
     hero: {
       eyebrow: "Bhalki · Bidar District · Karnataka",
-      heading: "Welcome to Nirmala M Halmandge Degree College, Bhalki",
+      heading: "Welcome to Nirmala M Halmandge Degree College, Bhalkiiiiii",
       sub: "Quality higher education in Arts, Science and Commerce — reaching deserving students across nearly twenty-seven villages of rural Bidar.",
       ctaPrimary: { label: "View More", href: "about.html" },
       ctaSecondary: { label: "Get in Touch", href: "contact.html" },
