@@ -123,7 +123,7 @@ const SITE = {
   home: {
     hero: {
       eyebrow: "Bhalki · Bidar District · Karnataka",
-      heading: "Welcome to Nirmala M Halmandge Degree College, Bhalkiiiiii",
+      heading: "Welcome to Nirmala M Halmandge Degree College, Bhalki",
       sub: "Quality higher education in Arts, Science and Commerce — reaching deserving students across nearly twenty-seven villages of rural Bidar.",
       ctaPrimary: { label: "View More", href: "about.html" },
       ctaSecondary: { label: "Get in Touch", href: "contact.html" },
