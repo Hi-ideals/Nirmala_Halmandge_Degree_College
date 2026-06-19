@@ -13,7 +13,7 @@ const SITE = {
      CORE IDENTITY
   ============================================================ */
   meta: {
-    name: "Nirmala M Halmandge Degree College",
+    name: "Nirmala M Halmandge Degree Collegeeeee",
     shortName: "NMH Degree College",
     place: "Bhalki",
     district: "Bidar",
